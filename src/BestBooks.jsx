@@ -1,23 +1,16 @@
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Make sure to import Bootstrap CSS
-import UnavailableBooks from './UnavailableBooks';
 
 
 function BestBooks({ books }) {
   if (books.length === 0) {
-    return <div>No books available</div>;
-  }
-
-  // Filter books based on availability
-  const availableBooks = books.filter(book => book.status === 'Available');
-
-  if (availableBooks.length === 0) {
-    return <UnavailableBooks books={books}/>;
+    return <div>
+      <h2>Sorry, no books currently available. Check back soon!</h2></div>;
   }
 
   return (
     <Carousel>
-      {availableBooks.map((book, idx) => (
+      {books.map((book, idx) => (
         <Carousel.Item key={idx}>
           <img
             className="d-block w-100"

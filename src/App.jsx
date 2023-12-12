@@ -15,6 +15,7 @@ function App() {
   }, []);
 
   async function fetchBooks(status = 'Available') {
+    
     let dbURL = `${SERVER}/books`;
 
     if (status) {
@@ -28,10 +29,11 @@ function App() {
       console.error(error);
     }
   }
+
   function handleStatusSubmit(event) {
     event.preventDefault();
-    const status = event.target.status.value;
-    fetchBooks(status);
+    const selectedStatus = event.target.status.value;
+    fetchBooks(selectedStatus);
   }
 
   return (
@@ -51,11 +53,12 @@ function App() {
                 <BestBooks books={books} />
                 <h2>Filter by status</h2>
                 <form onSubmit={handleStatusSubmit}>
-                  <select name='status'>
+                  <select name='status' defaultValue='Available'>
+                    {/* Default value set to 'Available' */}
                     <option value='Available'>Available</option>
                     <option value='Unavailable'>Unavailable</option>
                   </select>
-                  <button>ok</button>
+                  <button>Submit</button>
                 </form>
               </div>
             }
