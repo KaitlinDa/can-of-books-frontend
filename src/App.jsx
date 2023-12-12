@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import BestBooks from './components/BestBooks';
 import HandleError from './components/HandleError'
+import BookFormModal from './components/BookFormModal';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
@@ -11,6 +12,8 @@ const SERVER = import.meta.env.VITE_SERVER_URL;
 function App() {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const handleClose = () => setShowForm(false);
 
   useEffect(() => {
     fetchBooks();
@@ -49,6 +52,10 @@ function App() {
     fetchBooks(selectedStatus);
   }
 
+  const handleOpenForm = () => {
+    setShowForm(true);
+  };
+
   return (
     <>
       <BrowserRouter>
@@ -57,6 +64,7 @@ function App() {
           <Link to='/'>Home</Link>
           <Link to='/about'>About</Link>
         </nav>
+        <button onClick={handleOpenForm}>Add Book</button>
         <Routes>
           <Route
             exact
@@ -74,6 +82,9 @@ function App() {
                   </select>
                   <button>Submit</button>
                 </form>
+
+                <BookFormModal show={showForm} handleClose={handleClose} fetchBooks={fetchBooks} />
+
               </div>
             }
           />
