@@ -1,5 +1,6 @@
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Make sure to import Bootstrap CSS
+import UnavailableBooks from './UnavailableBooks';
 
 
 function BestBooks({ books }) {
@@ -11,7 +12,7 @@ function BestBooks({ books }) {
   const availableBooks = books.filter(book => book.status === 'Available');
 
   if (availableBooks.length === 0) {
-    return <div>No available books</div>;
+    return <UnavailableBooks books={books}/>;
   }
 
   return (
