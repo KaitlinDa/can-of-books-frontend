@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import BestBooks from './BestBooks';
+import BestBooks from './components/BestBooks';
+import HandleError from './components/HandleError'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
@@ -9,6 +10,7 @@ const SERVER = import.meta.env.VITE_SERVER_URL;
 
 function App() {
   const [books, setBooks] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchBooks();
@@ -25,8 +27,19 @@ function App() {
     try {
       const response = await axios.get(dbURL);
       setBooks(response.data);
+      setError(null);
     } catch (error) {
-      console.error(error);
+      if (error.response) {
+        // The request was made, but the server responded with a status code outside the 2xx range
+        const { status } = error.response;
+        setError(`Data Error - Status Code: ${status}`);
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError('Fetch Error: No response received');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        setError('Fetch Error: ' + error.message);
+      }
     }
   }
 
@@ -51,6 +64,7 @@ function App() {
             element={
               <div>
                 <BestBooks books={books} />
+                <HandleError error={error} />
                 <h2>Filter by status</h2>
                 <form onSubmit={handleStatusSubmit}>
                   <select name='status' defaultValue='Available'>
