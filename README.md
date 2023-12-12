@@ -14,7 +14,7 @@ Can of Books is a user-friendly application designed to simplify the process of 
 
 ## Getting Started
 
-In order to get started, you make a repo on GitHub and clone the repository to your local machine. There are two repositories for this app (front-end and back-end). Then, install the dependencies you need. Set up any environmental variables. Start the sever.
+In order to get started, you make a repo on GitHub and clone the repository to your local machine. There are two repositories for this app (front-end and back-end). Then, install the dependencies you need. Set up any environmental variables on Nelify. Start the sever (see back-end).
 
 ### Install Dependencies
 
@@ -22,6 +22,7 @@ In order to get started, you make a repo on GitHub and clone the repository to y
 - Bootstrap
 - react-router-dom
 - react-dom
+- Create an `.env` file: assign `VITE_SERVER_URL` to your localhost. Make sure this file is in your `.gitignore`.
 
 ## Architecture
 
