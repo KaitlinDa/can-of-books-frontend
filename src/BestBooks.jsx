@@ -1,13 +1,27 @@
+import { Carousel } from 'react-bootstrap';
+
 function BestBooks({ books }) {
+  if (books.length === 0) {
+    return <div>No books available</div>;
+  }
+
   return (
-    <>
-      {books.length && books.map((book, idx) => (
-        <div key={idx}>
-          {book.title} is {book.status}
-        </div>
+    <Carousel>
+      {books.map((book, idx) => (
+        <Carousel.Item key={idx}>
+          <img
+            className="d-block w-100"
+            src={book.imageUrl} 
+            alt={book.title}
+          />
+          <Carousel.Caption>
+            <h3>{book.title}</h3>
+            <p>Status: {book.status}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
       ))}
-    </>
-  )
+    </Carousel>
+  );
 }
 
 export default BestBooks;
