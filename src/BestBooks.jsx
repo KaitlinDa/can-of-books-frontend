@@ -20,12 +20,13 @@ function BestBooks({ books }) {
         <Carousel.Item key={idx}>
           <img
             className="d-block w-100"
-            src="https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_FMjpg_UX1000_.jpg"
+            src={book.image_url}
             alt={book.title}
+            style={{ maxHeight: '800px', objectFit: 'contain' }}
           />
-          <Carousel.Caption>
-            <h3>{book.title}</h3>
-            <p>Status: {book.status}</p>
+           <Carousel.Caption style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)', padding: '20px' }}>
+            <h3 style={{ color: '#fff' }}>{book.title}</h3>
+            <p style={{ color: '#fff' }}>Status: {book.status}</p>
           </Carousel.Caption>
         </Carousel.Item>
       ))}
