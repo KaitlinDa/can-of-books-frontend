@@ -1,11 +1,48 @@
-# Start your own "Can of Books" App
+# Can of Books Frontend
 
-This repository has starter code to begin work on creating your own online bookshelf.
+**Author**: Rhett Chase || Kaitlin Davis
 
-## What can books do?
+**Version**: 1.0.0
 
-Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next.
+## Overview
 
-## Use this template
+Can of Books is a user-friendly application designed to simplify the process of finding books. Whether you're a book enthusiast, a student, or just someone looking for a good read, Can of Books helps you locate books with various titles with ease.
 
-Clone this repo to your own account with the green "Use this template" button. Then, add any collaborators. Now you are ready to start adding features! Deploy your site to let the world know which books have had the greatest impact on you, and what's recommended. Enjoy!
+## Getting Started
+
+In order to get started, you want to make a repo on GitHUB and then clone that repository to your local machine. In this case, you will have two. One front-end and one back end. Then, install the dependencies you need. Set up any environmental variables. Start the sever.
+
+## Architecture
+
+### Frontend
+
+* Language: JavaScript with React
+* Styling: CSS
+
+### Backend
+
+* Mongoose and Bootstrap libraries
+
+## Change Log
+
+12-11-2023 6:30pm - Implimented a fully functional server that displays available books.
+
+## Estimates
+
+Name of feature: Set Up, Storage, and Book Component
+
+Estimate of time needed to complete: 2.5 hours
+
+Start time: 4:00pm
+
+Finish time: 6:30pm
+
+Actual time needed to complete: 2.5 hours
+
+## Credit and Collaborations
+
+Chat GPT
+
+## Lighthouse Score
+
+![Lighthouse Score for fornt end application](img/lighthouse.png)
