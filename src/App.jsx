@@ -13,6 +13,7 @@ import Container from 'react-bootstrap/Container';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import AllBooks from './components/AllBooks';
 
 const SERVER = import.meta.env.VITE_SERVER_URL;
 
@@ -50,6 +51,20 @@ export default function App() {
         // Something happened in setting up the request that triggered an Error
         setError('Fetch Error: ' + error.message);
       }
+    }
+  }
+
+  async function handleBookUpdate(bookToUpdate) {
+    const updateUrl = `${SERVER}/books/${bookToUpdate._id}`;
+
+    try {
+      await axios.put(updateUrl, bookToUpdate);
+      const updatedBooks = books.map(book => book._id === bookToUpdate._id ? bookToUpdate : book);
+      setBooks(updatedBooks);
+      fetchBooks();
+      handleClose(); // close modal after update
+    } catch (error) {
+      console.log(error);
     }
   }
   
@@ -91,6 +106,7 @@ export default function App() {
                       Delete Book
                     </Button>
                   </>
+        
                 )}
                 {showAddBook && (
                   <AddBook
@@ -106,6 +122,7 @@ export default function App() {
                     fetchBooks={fetchBooks}
                   />
                 )}
+                <AllBooks books={books} onUpdate={handleBookUpdate}/>
               </div>
             }
           />
