@@ -42,7 +42,7 @@ function DeleteBook({ show, handleClose, fetchBooks }) {
             ID:
             <input type="text" name="_id" value={formData._id} onChange={handleChange} />
           </label>
-          <Button type="submit">Delete Book</Button>
+          <Button type="submit" className='button'>Delete Book</Button>
         </form>
       </Modal.Body>
       <Modal.Footer>

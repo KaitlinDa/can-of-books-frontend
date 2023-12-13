@@ -61,7 +61,7 @@ function AddBook({ show, handleClose, fetchBooks }) {
             <input type="text" name="image_url" value={formData.image_url} onChange={handleChange} />
           </label>
           {/* Add other form elements as necessary */}
-          <Button type="submit">Add Book</Button>
+          <Button type="submit" className='button'>Add Book</Button>
         </form>
       </Modal.Body>
       <Modal.Footer>

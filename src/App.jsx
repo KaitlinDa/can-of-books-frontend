@@ -4,15 +4,19 @@ import BestBooks from './components/BestBooks';
 import HandleError from './components/HandleError';
 import AddBook from './components/AddBook';
 import DeleteBook from './components/DeleteBook';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import AvailabilityFilter from './components/AvailabilityFilter';
 import About from './components/About';
+import Button from 'react-bootstrap/Button';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import NavBar from './components/NavBar';
 
 const SERVER = import.meta.env.VITE_SERVER_URL;
 
-function App() {
+export default function App() {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
   const [showAddBook, setShowAddBook] = useState(false);
@@ -70,45 +74,46 @@ function App() {
 
   return (
     <BrowserRouter>
-    <div>
-      <nav>
-        <h1>Can of Books</h1>
-        <Link to='/'>Home</Link>
-        <Link to='/about'>About</Link>
-      </nav>
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <div>
-              <BestBooks books={books} />
-              <HandleError error={error} />
-              <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />
-              {(window.location.pathname === '/' || window.location.pathname === '/about') && (
-                <>
-                  <button onClick={handleOpenAddBook}>Add Book</button>
-                  <button onClick={handleOpenDeleteBook}>Delete Book</button>
-                </>
-              )}
-              {showAddBook && (
-                <AddBook show={showAddBook} handleClose={handleClose} fetchBooks={fetchBooks} />
-              )}
-              {showDeleteBook && (
-                <DeleteBook
-                  show={showDeleteBook}
-                  handleClose={handleClose}
-                  fetchBooks={fetchBooks}
-                />
-              )}
-            </div>
-          }
-        />
-        <Route path='/about' element={<About />} />
-      </Routes>
-    </div>
-  </BrowserRouter>
-);
+        <NavBar />
+        <Container>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <div>
+                <BestBooks books={books} />
+                <HandleError error={error} />
+                <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />
+                {window.location.pathname === '/' && (
+                  <>
+                    <Button onClick={handleOpenAddBook} className='button'>
+                      Add Book
+                    </Button>
+                    <Button onClick={handleOpenDeleteBook} className='button'>
+                      Delete Book
+                    </Button>
+                  </>
+                )}
+                {showAddBook && (
+                  <AddBook
+                    show={showAddBook}
+                    handleClose={handleClose}
+                    fetchBooks={fetchBooks}
+                  />
+                )}
+                {showDeleteBook && (
+                  <DeleteBook
+                    show={showDeleteBook}
+                    handleClose={handleClose}
+                    fetchBooks={fetchBooks}
+                  />
+                )}
+              </div>
+            }
+          />
+          <Route path='/about' element={<About />} />
+        </Routes>
+      </Container>
+    </BrowserRouter>
+  );
 }
-
-
-export default App;

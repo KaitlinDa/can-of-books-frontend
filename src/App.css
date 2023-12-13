@@ -3,3 +3,18 @@ nav {
     align-items: center;
     gap: 2rem;
   }
+
+.button {
+  margin: 10px;
+}
+
+.navbar {
+  background-color: lightblue;
+  margin-bottom: 2rem;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+  padding-left: 5rem;
+}
