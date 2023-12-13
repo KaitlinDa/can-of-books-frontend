@@ -1,15 +1,14 @@
-// BookFormModal.jsx
-
 import { useState } from 'react';
 import axios from 'axios';
 
 const SERVER = import.meta.env.VITE_SERVER_URL;
 
-function BookFormModal({ show, handleClose, fetchBooks }) {
+function AddBook({ show, handleClose, fetchBooks }) {
   const [formData, setFormData] = useState({
     title: '',
-    author: '',
-    // Add other fields as necessary
+    status: '',
+    description: '',
+    image_url: ''
   });
 
   const handleChange = (event) => {
@@ -38,9 +37,18 @@ function BookFormModal({ show, handleClose, fetchBooks }) {
           <input type="text" name="title" value={formData.title} onChange={handleChange} />
         </label>
         <label>
-          Author:
-          <input type="text" name="author" value={formData.author} onChange={handleChange} />
+          Description:
+          <input type="text" name="description" value={formData.description} onChange={handleChange} />
         </label>
+        <label>
+          Availability Status:
+          <input type="text" name="availability" value={formData.availability} onChange={handleChange} />
+        </label>
+        <label>
+          Image Url
+          <input type="text" name="imageUrl" value={formData.image_url} onChange={handleChange} />
+        </label>
+      
         {/* Add other form elements as necessary */}
         <button type="submit">Add Book</button>
       </form>
@@ -48,4 +56,4 @@ function BookFormModal({ show, handleClose, fetchBooks }) {
   );
 }
 
-export default BookFormModal;
+export default AddBook;

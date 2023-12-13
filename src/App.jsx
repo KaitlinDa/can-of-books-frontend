@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import BestBooks from './components/BestBooks';
 import HandleError from './components/HandleError'
-import BookFormModal from './components/BookFormModal';
+import AddBook from './components/AddBook';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import AvailabilityFilter from './components/AvailabilityFilter';
 
 const SERVER = import.meta.env.VITE_SERVER_URL;
 
@@ -73,17 +74,8 @@ function App() {
               <div>
                 <BestBooks books={books} />
                 <HandleError error={error} />
-                <h2>Filter by status</h2>
-                <form onSubmit={handleStatusSubmit}>
-                  <select name='status' defaultValue='Available'>
-                    {/* Default value set to 'Available' */}
-                    <option value='Available'>Available</option>
-                    <option value='Unavailable'>Unavailable</option>
-                  </select>
-                  <button>Submit</button>
-                </form>
-
-                <BookFormModal show={showForm} handleClose={handleClose} fetchBooks={fetchBooks} />
+                <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />   
+                <AddBook show={showForm} handleClose={handleClose} fetchBooks={fetchBooks} />
 
               </div>
             }
