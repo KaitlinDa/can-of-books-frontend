@@ -20,7 +20,7 @@ function DeleteBook({ show, handleClose, fetchBooks }) {
     event.preventDefault();
     try {
       console.log('Deleting book data:', formData); 
-      const response = await axios.post(`${SERVER}/books`, formData);
+      const response = await axios.delete(`${SERVER}/books/:${id}`, formData);
       console.log('Server response:', response.data); // Log the server response
       fetchBooks();
       handleClose();
@@ -40,7 +40,7 @@ function DeleteBook({ show, handleClose, fetchBooks }) {
         <form onSubmit={handleSubmit}>
           <label>
             ID:
-            <input type="text" name="id" value={formData.id} onChange={handleChange} />
+            <input type="text" name="_id" value={formData._id} onChange={handleChange} />
           </label>
           <Button type="submit">Delete Book</Button>
         </form>
