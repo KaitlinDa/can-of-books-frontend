@@ -30,6 +30,7 @@ function App() {
 
     try {
       const response = await axios.get(dbURL);
+      console.log('Fetched books:', response.data); // Log the fetched books
       setBooks(response.data);
       setError(null);
     } catch (error) {

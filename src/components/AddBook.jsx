@@ -15,16 +15,18 @@ function AddBook({ show, handleClose, fetchBooks }) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = async (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
     try {
+      console.log('Submitting book data:', formData); 
       const response = await axios.post(`${SERVER}/books`, formData);
+      console.log('Server response:', response.data); // Log the server response
       fetchBooks();
       handleClose();
     } catch (error) {
       console.error('Error adding book:', error);
     }
-  };
+  }
 
   if (!show) return null;
 
@@ -42,11 +44,11 @@ function AddBook({ show, handleClose, fetchBooks }) {
         </label>
         <label>
           Availability Status:
-          <input type="text" name="availability" value={formData.availability} onChange={handleChange} />
+          <input type="text" name="status" value={formData.status} onChange={handleChange} />
         </label>
         <label>
           Image Url
-          <input type="text" name="imageUrl" value={formData.image_url} onChange={handleChange} />
+          <input type="text" name="image_url" value={formData.image_url} onChange={handleChange} />
         </label>
       
         {/* Add other form elements as necessary */}
