@@ -15,7 +15,6 @@ function App() {
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const handleClose = () => setShowForm(false);
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchBooks();
@@ -58,13 +57,6 @@ function App() {
     setShowForm(true);
   };
 
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
 
   return (
     <>
