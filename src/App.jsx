@@ -122,11 +122,11 @@ export default function App() {
                     fetchBooks={fetchBooks}
                   />
                 )}
-                <AllBooks books={books} onUpdate={handleBookUpdate}/>
               </div>
             }
           />
           <Route path='/about' element={<About />} />
+          <Route path='/edit' element={<AllBooks books={books} onUpdate={handleBookUpdate} />} />
         </Routes>
       </Container>
     </BrowserRouter>

@@ -35,8 +35,14 @@ function Book({ book, onUpdate }) {
       <span onClick={handleEditClick}>
         [Edit]
         <h3>{book.title}</h3>
+        <h4>{book.status} </h4>
         <h4>{book.description} </h4>
-        <img src={book.img_url} alt={book.title} />
+        <img
+          className='d-block w-100'
+          src={book.image_url}
+          alt={book.title}
+          style={{ maxHeight: '200px', objectFit: 'contain' }}
+        />
       </span>
       <UpdateBookModal
         show={showModal}

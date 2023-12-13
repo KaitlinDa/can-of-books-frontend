@@ -15,6 +15,9 @@ export default function NavBar() {
             <Link to='/' className='nav-link'>
               Home
             </Link>
+            <Link to='/edit' className='nav-link'>
+              Edit Books
+            </Link>
             <Link to='/about' className='nav-link'>
               About
             </Link>
