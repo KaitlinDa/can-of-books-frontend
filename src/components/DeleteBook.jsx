@@ -16,8 +16,8 @@ function DeleteBook({ show, handleClose, fetchBooks }) {
   };
 
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit() {
+    // event.preventDefault();
     try {
       console.log('Deleting book data:', formData); 
       const response = await axios.delete(`${SERVER}/books/${formData._id}`, formData);

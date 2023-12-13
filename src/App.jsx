@@ -14,9 +14,8 @@ const SERVER = import.meta.env.VITE_SERVER_URL;
 function App() {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
-  const [showForm, setShowForm] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
-  const handleClose = () => setShowForm(false);
+  const [showAddBook, setShowAddBook] = useState(false);
+  const [showDeleteBook, setShowDeleteBook] = useState(false);
 
   useEffect(() => {
     fetchBooks();
@@ -55,12 +54,17 @@ function App() {
     fetchBooks(selectedStatus);
   }
 
-  const handleOpenForm = () => {
-    setShowForm(true);
+  const handleOpenAddBook = () => {
+    setShowAddBook(true);
   };
 
-  const handleOpenDelete = () => {
-    setShowDelete(true);
+  const handleOpenDeleteBook = () => {
+    setShowDeleteBook(true);
+  };
+
+  const handleClose = () => {
+    setShowAddBook(false);
+    setShowDeleteBook(false);
   };
 
 
@@ -72,8 +76,8 @@ function App() {
           <Link to='/'>Home</Link>
           <Link to='/about'>About</Link>
         </nav>
-        <button onClick={handleOpenForm}>Add Book</button>
-        <button onClick={handleOpenDelete}>Delete Book</button>
+        <button onClick={handleOpenAddBook}>Add Book</button>
+        <button onClick={handleOpenDeleteBook}>Delete Book</button>
         <Routes>
           <Route
             exact
@@ -84,12 +88,12 @@ function App() {
                 <HandleError error={error} />
                 <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />
                 <AddBook
-                  show={showForm}
+                  show={showAddBook}
                   handleClose={handleClose}
                   fetchBooks={fetchBooks}
                 />
                  <DeleteBook
-                  show={showDelete}
+                  show={showDeleteBook}
                   handleClose={handleClose}
                   fetchBooks={fetchBooks}
                 />
