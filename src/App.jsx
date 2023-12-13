@@ -3,6 +3,7 @@ import axios from 'axios';
 import BestBooks from './components/BestBooks';
 import HandleError from './components/HandleError';
 import AddBook from './components/AddBook';
+import DeleteBook from './components/DeleteBook';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
@@ -14,6 +15,7 @@ function App() {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
   const handleClose = () => setShowForm(false);
 
   useEffect(() => {
@@ -57,6 +59,10 @@ function App() {
     setShowForm(true);
   };
 
+  const handleOpenDelete = () => {
+    setShowDelete(true);
+  };
+
 
   return (
     <>
@@ -67,6 +73,7 @@ function App() {
           <Link to='/about'>About</Link>
         </nav>
         <button onClick={handleOpenForm}>Add Book</button>
+        <button onClick={handleOpenDelete}>Delete Book</button>
         <Routes>
           <Route
             exact
@@ -78,6 +85,11 @@ function App() {
                 <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />
                 <AddBook
                   show={showForm}
+                  handleClose={handleClose}
+                  fetchBooks={fetchBooks}
+                />
+                 <DeleteBook
+                  show={showDelete}
                   handleClose={handleClose}
                   fetchBooks={fetchBooks}
                 />
