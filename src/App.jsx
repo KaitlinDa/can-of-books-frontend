@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import BestBooks from './components/BestBooks';
-import HandleError from './components/HandleError'
+import HandleError from './components/HandleError';
 import AddBook from './components/AddBook';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,13 +15,13 @@ function App() {
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const handleClose = () => setShowForm(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchBooks();
   }, []);
 
   async function fetchBooks(status = 'Available') {
-    
     let dbURL = `${SERVER}/books`;
 
     if (status) {
@@ -58,6 +58,14 @@ function App() {
     setShowForm(true);
   };
 
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       <BrowserRouter>
@@ -75,9 +83,12 @@ function App() {
               <div>
                 <BestBooks books={books} />
                 <HandleError error={error} />
-                <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />   
-                <AddBook show={showForm} handleClose={handleClose} fetchBooks={fetchBooks} />
-
+                <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />
+                <AddBook
+                  show={showForm}
+                  handleClose={handleClose}
+                  fetchBooks={fetchBooks}
+                />
               </div>
             }
           />
