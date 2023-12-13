@@ -20,7 +20,7 @@ function DeleteBook({ show, handleClose, fetchBooks }) {
     event.preventDefault();
     try {
       console.log('Deleting book data:', formData); 
-      const response = await axios.delete(`${SERVER}/books/:${id}`, formData);
+      const response = await axios.delete(`${SERVER}/books/${formData._id}`, formData);
       console.log('Server response:', response.data); // Log the server response
       fetchBooks();
       handleClose();
