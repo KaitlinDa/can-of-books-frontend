@@ -1,23 +1,28 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import BestBooks from './components/BestBooks';
-import HandleError from './components/HandleError'
+import HandleError from './components/HandleError';
+import AddBook from './components/AddBook';
+import DeleteBook from './components/DeleteBook';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import AvailabilityFilter from './components/AvailabilityFilter';
 
 const SERVER = import.meta.env.VITE_SERVER_URL;
 
 function App() {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const handleClose = () => setShowForm(false);
 
   useEffect(() => {
     fetchBooks();
   }, []);
 
   async function fetchBooks(status = 'Available') {
-    
     let dbURL = `${SERVER}/books`;
 
     if (status) {
@@ -26,6 +31,7 @@ function App() {
 
     try {
       const response = await axios.get(dbURL);
+      console.log('Fetched books:', response.data); // Log the fetched books
       setBooks(response.data);
       setError(null);
     } catch (error) {
@@ -49,6 +55,15 @@ function App() {
     fetchBooks(selectedStatus);
   }
 
+  const handleOpenForm = () => {
+    setShowForm(true);
+  };
+
+  const handleOpenDelete = () => {
+    setShowDelete(true);
+  };
+
+
   return (
     <>
       <BrowserRouter>
@@ -57,6 +72,8 @@ function App() {
           <Link to='/'>Home</Link>
           <Link to='/about'>About</Link>
         </nav>
+        <button onClick={handleOpenForm}>Add Book</button>
+        <button onClick={handleOpenDelete}>Delete Book</button>
         <Routes>
           <Route
             exact
@@ -65,15 +82,17 @@ function App() {
               <div>
                 <BestBooks books={books} />
                 <HandleError error={error} />
-                <h2>Filter by status</h2>
-                <form onSubmit={handleStatusSubmit}>
-                  <select name='status' defaultValue='Available'>
-                    {/* Default value set to 'Available' */}
-                    <option value='Available'>Available</option>
-                    <option value='Unavailable'>Unavailable</option>
-                  </select>
-                  <button>Submit</button>
-                </form>
+                <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />
+                <AddBook
+                  show={showForm}
+                  handleClose={handleClose}
+                  fetchBooks={fetchBooks}
+                />
+                 <DeleteBook
+                  show={showDelete}
+                  handleClose={handleClose}
+                  fetchBooks={fetchBooks}
+                />
               </div>
             }
           />
