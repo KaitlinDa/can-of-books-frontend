@@ -52,13 +52,11 @@ export default function App() {
       }
     }
   }
-
-  function handleStatusSubmit(event) {
-    event.preventDefault();
-    const selectedStatus = event.target.status.value;
+  
+  function handleStatusSubmit(selectedStatus) {
     fetchBooks(selectedStatus);
   }
-
+  
   const handleOpenAddBook = () => {
     setShowAddBook(true);
   };
