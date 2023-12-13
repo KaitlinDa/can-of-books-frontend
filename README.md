@@ -32,16 +32,16 @@ In order to get started, you make a repo on GitHub and clone the repository to y
 
 ## Change Log
 
-12-11-2023 6:30pm - Implemented a fully functional front-end running on `local server` using React Carousel, which displays books based on availability status that the user selects from drop-down. Utilized `BrowserRouter` to store the current location in the browser's address bar using clean URLs and navigates using the browser's built-in history stack.
+12-12-2023 8:00pm - Implemented an add and delete book function for the user to use. Installed a modal for a cleaner interface.
 
 ## Estimates
 
 ### Set Up, Storage, and Book Component
 
-- Estimate of time needed to complete: 2.5 hours
-- Start time: 4:00pm
-- Finish time: 6:30pm
-- Actual time needed to complete: 2.5 hours
+- Estimate of time needed to complete: 3 hours
+- Start time: 5:00pm
+- Finish time: 8:00pm
+- Actual time needed to complete: 3 hours
 
 ## Credit and Collaborations
 
@@ -50,4 +50,4 @@ In order to get started, you make a repo on GitHub and clone the repository to y
 
 ## Lighthouse Score
 
-![Lighthouse Score for front-end application](img/accessibility.png)
+![Lighthouse Score for front-end application](img/lighthouse.png)
