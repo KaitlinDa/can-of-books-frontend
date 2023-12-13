@@ -8,6 +8,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import AvailabilityFilter from './components/AvailabilityFilter';
+import About from './components/About';
 
 const SERVER = import.meta.env.VITE_SERVER_URL;
 
@@ -67,57 +68,47 @@ function App() {
     setShowDeleteBook(false);
   };
 
-
   return (
-    <>
-      <BrowserRouter>
-        <nav>
-          <h1>Can of Books</h1>
-          <Link to='/'>Home</Link>
-          <Link to='/about'>About</Link>
-        </nav>
-        <button onClick={handleOpenAddBook}>Add Book</button>
-        <button onClick={handleOpenDeleteBook}>Delete Book</button>
-        <Routes>
-          <Route
-            exact
-            path='/'
-            element={
-              <div>
-                <BestBooks books={books} />
-                <HandleError error={error} />
-                <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />
-                <AddBook
-                  show={showAddBook}
-                  handleClose={handleClose}
-                  fetchBooks={fetchBooks}
-                />
-                 <DeleteBook
+    <BrowserRouter>
+    <div>
+      <nav>
+        <h1>Can of Books</h1>
+        <Link to='/'>Home</Link>
+        <Link to='/about'>About</Link>
+      </nav>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <div>
+              <BestBooks books={books} />
+              <HandleError error={error} />
+              <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />
+              {(window.location.pathname === '/' || window.location.pathname === '/about') && (
+                <>
+                  <button onClick={handleOpenAddBook}>Add Book</button>
+                  <button onClick={handleOpenDeleteBook}>Delete Book</button>
+                </>
+              )}
+              {showAddBook && (
+                <AddBook show={showAddBook} handleClose={handleClose} fetchBooks={fetchBooks} />
+              )}
+              {showDeleteBook && (
+                <DeleteBook
                   show={showDeleteBook}
                   handleClose={handleClose}
                   fetchBooks={fetchBooks}
                 />
-              </div>
-            }
-          />
-          <Route
-            path='/about'
-            element={
-              <>
-                <h1>About the Developers</h1>
-                <p>
-                  <a href='https://github.com/rhettchase'>Rhett Chase</a>
-                </p>
-                <p>
-                  <a href='https://github.com/KaitlinDa'>Kaitlin Davis</a>
-                </p>
-              </>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+              )}
+            </div>
+          }
+        />
+        <Route path='/about' element={<About />} />
+      </Routes>
+    </div>
+  </BrowserRouter>
+);
 }
+
 
 export default App;

@@ -11,7 +11,7 @@ function AddBook({ show, handleClose, fetchBooks }) {
     title: '',
     status: '',
     description: '',
-    image_url: ''
+    image_url: 'https://dummyimage.com/600x400/000/fff'
   });
 
   const handleChange = (event) => {
@@ -51,7 +51,10 @@ function AddBook({ show, handleClose, fetchBooks }) {
           </label>
           <label>
             Availability Status:
-            <input type="text" name="status" value={formData.status} onChange={handleChange} />
+            <select name="status" value={formData.status} onChange={handleChange}>
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+          </select>
           </label>
           <label>
             Image Url:
