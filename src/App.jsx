@@ -92,6 +92,18 @@ export default function App() {
     setStatus(event.target.value);
   };
 
+  async function handleDelete(bookToDelete) {
+    const deleteUrl = `${SERVER}/books/${bookToDelete._id}`;
+
+    try {
+      await axios.delete(deleteUrl);
+      const filteredBooks = books.filter(book => book._id !== bookToDelete._id);
+      setBooks(filteredBooks);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <BrowserRouter>
         <NavBar />
@@ -109,9 +121,6 @@ export default function App() {
                     <Button onClick={handleOpenAddBook} className='button'>
                       Add Book
                     </Button>
-                    <Button onClick={handleOpenDeleteBook} className='button'>
-                      Delete Book
-                    </Button>
                   </>
         
                 )}
@@ -122,18 +131,11 @@ export default function App() {
                     fetchBooks={fetchBooks}
                   />
                 )}
-                {showDeleteBook && (
-                  <DeleteBook
-                    show={showDeleteBook}
-                    handleClose={handleClose}
-                    fetchBooks={fetchBooks}
-                  />
-                )}
               </div>
             }
           />
           <Route path='/about' element={<About />} />
-          <Route path='/edit' element={<AllBooks books={books} onUpdate={handleBookUpdate} />} />
+          <Route path='/edit' element={<AllBooks books={books} onUpdate={handleBookUpdate} handleDelete={handleDelete}/>} />
         </Routes>
       </Container>
     </BrowserRouter>
