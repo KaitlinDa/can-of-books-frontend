@@ -34,6 +34,7 @@ In order to get started, you make a repo on GitHub and clone the repository to y
 
 - 12-11-2023 6:30pm - Implemented a fully functional front-end running on local server using React Carousel, which displays books based on availability status that the user selects from drop-down. Utilized BrowserRouter to store the current location in the browser's address bar using clean URLs and navigates using the browser's built-in history stack.
 - 12-12-2023 8:00pm - Implemented an add and delete book functionality for the user to have the ability to add a new book to the collection or delete a book form the collection using `/POST` and `/DELETE`. Developed a modal for a clean form interface to allow focus of the user.
+- 12-13-2023 6:50 pm - Added a form in the front end to let the user edit an existing book's details in a modal. When the form is submitted, send the new data to the server, and update the page according to the response.
 
 ## Estimates
 

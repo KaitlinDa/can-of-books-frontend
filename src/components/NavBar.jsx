@@ -18,6 +18,9 @@ export default function NavBar() {
             <Link to='/edit' className='nav-link'>
               Edit & Delete Books
             </Link>
+            <Link to='/create' className='nav-link'>
+              Create
+            </Link>
             <Link to='/about' className='nav-link'>
               About
             </Link>

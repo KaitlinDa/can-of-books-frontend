@@ -3,7 +3,7 @@ import axios from 'axios';
 import BestBooks from './components/BestBooks';
 import HandleError from './components/HandleError';
 import AddBook from './components/AddBook';
-import DeleteBook from './components/DeleteBook';
+import CreateBook from './components/CreateBook';
 import AvailabilityFilter from './components/AvailabilityFilter';
 import About from './components/About';
 import Button from 'react-bootstrap/Button';
@@ -21,8 +21,8 @@ export default function App() {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
   const [showAddBook, setShowAddBook] = useState(false);
-  const [showDeleteBook, setShowDeleteBook] = useState(false);
   const [status, setStatus] = useState('Available');
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     fetchBooks();
@@ -77,13 +77,8 @@ export default function App() {
     setShowAddBook(true);
   };
 
-  const handleOpenDeleteBook = () => {
-    setShowDeleteBook(true);
-  };
-
   const handleClose = () => {
     setShowAddBook(false);
-    setShowDeleteBook(false);
   };
 
 
@@ -102,6 +97,15 @@ export default function App() {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async function handleCreate(bookInfo) {
+    const deleteUrl = `${SERVER}/books`;
+    const response = await axios.post(deleteUrl, bookInfo);
+    const newBook = response.data;
+    setBooks([...books, newBook]);
+    setShowCreateModal(false);
+
   }
 
   return (
@@ -135,7 +139,10 @@ export default function App() {
             }
           />
           <Route path='/about' element={<About />} />
-          <Route path='/edit' element={<AllBooks books={books} onUpdate={handleBookUpdate} handleDelete={handleDelete}/>} />
+          <Route path='/edit' element={<AllBooks books={books} onUpdate={handleBookUpdate} handleDelete={handleDelete} />} />
+          <Route path="/create" element={
+            <CreateBook handleCreate={handleCreate} />
+          } />
         </Routes>
       </Container>
     </BrowserRouter>
