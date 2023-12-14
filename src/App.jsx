@@ -26,7 +26,14 @@ export default function App() {
 
   useEffect(() => {
     fetchBooks();
-  }, []);
+
+    // Check if the current route is '/create'
+    if (window.location.pathname === '/create') {
+      setShowCreateModal(true);
+    } else {
+      setShowCreateModal(false);
+    }
+  }, [status]);
 
   async function fetchBooks() {
     let dbURL = `${SERVER}/books`;
@@ -60,7 +67,9 @@ export default function App() {
 
     try {
       await axios.put(updateUrl, bookToUpdate);
-      const updatedBooks = books.map(book => book._id === bookToUpdate._id ? bookToUpdate : book);
+      const updatedBooks = books.map((book) =>
+        book._id === bookToUpdate._id ? bookToUpdate : book
+      );
       setBooks(updatedBooks);
       fetchBooks();
       handleClose(); // close modal after update
@@ -68,11 +77,11 @@ export default function App() {
       console.log(error);
     }
   }
-  
+
   function handleStatusSubmit(selectedStatus) {
     fetchBooks(selectedStatus);
   }
-  
+
   const handleOpenAddBook = () => {
     setShowAddBook(true);
   };
@@ -80,8 +89,6 @@ export default function App() {
   const handleClose = () => {
     setShowAddBook(false);
   };
-
-
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
@@ -92,7 +99,9 @@ export default function App() {
 
     try {
       await axios.delete(deleteUrl);
-      const filteredBooks = books.filter(book => book._id !== bookToDelete._id);
+      const filteredBooks = books.filter(
+        (book) => book._id !== bookToDelete._id
+      );
       setBooks(filteredBooks);
     } catch (error) {
       console.error(error);
@@ -105,13 +114,12 @@ export default function App() {
     const newBook = response.data;
     setBooks([...books, newBook]);
     setShowCreateModal(false);
-
   }
 
   return (
     <BrowserRouter>
-        <NavBar />
-        <Container>
+      <NavBar />
+      <Container>
         <Routes>
           <Route
             path='/'
@@ -119,14 +127,17 @@ export default function App() {
               <div>
                 <BestBooks books={books} />
                 <HandleError error={error} />
-                <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} handleStatusChange={handleStatusChange} status={status}/>
+                <AvailabilityFilter
+                  handleStatusSubmit={handleStatusSubmit}
+                  handleStatusChange={handleStatusChange}
+                  status={status}
+                />
                 {window.location.pathname === '/' && (
                   <>
                     <Button onClick={handleOpenAddBook} className='button'>
                       Add Book
                     </Button>
                   </>
-        
                 )}
                 {showAddBook && (
                   <AddBook
@@ -139,10 +150,26 @@ export default function App() {
             }
           />
           <Route path='/about' element={<About />} />
-          <Route path='/edit' element={<AllBooks books={books} onUpdate={handleBookUpdate} handleDelete={handleDelete} />} />
-          <Route path="/create" element={
-            <CreateBook handleCreate={handleCreate} />
-          } />
+          <Route
+            path='/edit'
+            element={
+              <AllBooks
+                books={books}
+                onUpdate={handleBookUpdate}
+                handleDelete={handleDelete}
+              />
+            }
+          />
+          <Route
+            path='/create'
+            element={
+              <CreateBook
+                handleCreate={handleCreate}
+                show={showCreateModal}
+                onClose={() => setShowCreateModal(false)}
+              />
+            }
+          />
         </Routes>
       </Container>
     </BrowserRouter>
