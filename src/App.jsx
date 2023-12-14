@@ -22,15 +22,16 @@ export default function App() {
   const [error, setError] = useState(null);
   const [showAddBook, setShowAddBook] = useState(false);
   const [showDeleteBook, setShowDeleteBook] = useState(false);
+  const [status, setStatus] = useState('Available');
 
   useEffect(() => {
     fetchBooks();
   }, []);
 
-  async function fetchBooks(status = 'Available') {
+  async function fetchBooks() {
     let dbURL = `${SERVER}/books`;
 
-    if (status) {
+    if (status !== 'All') {
       dbURL += `?status=${status}`;
     }
 
@@ -85,6 +86,12 @@ export default function App() {
     setShowDeleteBook(false);
   };
 
+
+
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value);
+  };
+
   return (
     <BrowserRouter>
         <NavBar />
@@ -96,7 +103,7 @@ export default function App() {
               <div>
                 <BestBooks books={books} />
                 <HandleError error={error} />
-                <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} />
+                <AvailabilityFilter handleStatusSubmit={handleStatusSubmit} handleStatusChange={handleStatusChange} status={status}/>
                 {window.location.pathname === '/' && (
                   <>
                     <Button onClick={handleOpenAddBook} className='button'>
