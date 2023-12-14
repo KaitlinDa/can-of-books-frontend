@@ -39,8 +39,8 @@ function Book({ book, onUpdate, handleDelete }) {
 
   return (
     <>
-      <Button onClick={handleEditClick} className='button'> Edit </Button>
-      <Button onClick={deleteBook} className='button'> Delete </Button>
+      <Button onClick={handleEditClick} className='button' variant='secondary'> Edit </Button>
+      <Button onClick={deleteBook} className='button' variant="danger"> Delete </Button>
         <h3>{book.title}</h3>
         <h4>{book.status} </h4>
         <h4>{book.description} </h4>

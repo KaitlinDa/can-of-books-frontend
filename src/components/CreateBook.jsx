@@ -20,7 +20,7 @@ export default function CreateBook({ handleCreate }) {
     <Form onSubmit={handleSubmit}>
       <Form.Group className='mb-3' controlId='formTitle'>
         <Form.Label>Title</Form.Label>
-        <Form.Control type='text' placeholder='Enter cat name' />
+        <Form.Control type='text' placeholder='Enter Book Title' />
       </Form.Group>
       <Form.Group className='mb-3' controlId='formStatus'>
         <Form.Label>Status</Form.Label>
