@@ -73,4 +73,4 @@ In order to get started, you make a repo on GitHub and clone the repository to y
 
 ## Lighthouse Score
 
-![Lighthouse Score for front-end application](img/lighthouse.png)
+![Lighthouse Score for front-end application](img/accessibility.png)
