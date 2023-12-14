@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import BestBooks from './components/BestBooks';
 import HandleError from './components/HandleError';
-import AddBook from './components/AddBook';
 import CreateBook from './components/CreateBook';
 import AvailabilityFilter from './components/AvailabilityFilter';
 import About from './components/About';
@@ -20,7 +19,6 @@ const SERVER = import.meta.env.VITE_SERVER_URL;
 export default function App() {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
-  const [showAddBook, setShowAddBook] = useState(false);
   const [status, setStatus] = useState('Available');
   const [showCreateModal, setShowCreateModal] = useState(false);
 
@@ -72,7 +70,6 @@ export default function App() {
       );
       setBooks(updatedBooks);
       fetchBooks();
-      handleClose(); // close modal after update
     } catch (error) {
       console.log(error);
     }
@@ -82,13 +79,6 @@ export default function App() {
     fetchBooks(selectedStatus);
   }
 
-  const handleOpenAddBook = () => {
-    setShowAddBook(true);
-  };
-
-  const handleClose = () => {
-    setShowAddBook(false);
-  };
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
@@ -132,20 +122,6 @@ export default function App() {
                   handleStatusChange={handleStatusChange}
                   status={status}
                 />
-                {window.location.pathname === '/' && (
-                  <>
-                    <Button onClick={handleOpenAddBook} className='button'>
-                      Add Book
-                    </Button>
-                  </>
-                )}
-                {showAddBook && (
-                  <AddBook
-                    show={showAddBook}
-                    handleClose={handleClose}
-                    fetchBooks={fetchBooks}
-                  />
-                )}
               </div>
             }
           />
@@ -165,6 +141,7 @@ export default function App() {
             element={
               <CreateBook
                 handleCreate={handleCreate}
+                fetchBooks={fetchBooks}
                 show={showCreateModal}
                 onClose={() => setShowCreateModal(false)}
               />

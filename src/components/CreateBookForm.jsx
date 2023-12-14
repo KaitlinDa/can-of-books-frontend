@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 
-export default function BookForm({ onCreate, setShowModal }) {
+export default function BookForm({ onCreate, setShowModal, fetchBooks }) {
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
@@ -15,6 +15,7 @@ export default function BookForm({ onCreate, setShowModal }) {
     });
     setShowModal(false);
     navigate('/');
+    fetchBooks();
   }
 
   return (
