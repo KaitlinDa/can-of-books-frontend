@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import BestBooks from './components/BestBooks';
-import HandleError from './components/HandleError';
+// import BestBooks from './components/BestBooks';
+// import HandleError from './components/HandleError';
 import CreateBook from './components/CreateBook';
-import AvailabilityFilter from './components/AvailabilityFilter';
+// import AvailabilityFilter from './components/AvailabilityFilter';
+import BooksLayout from './components/BooksLayout';
 import About from './components/About';
-import Button from 'react-bootstrap/Button';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -75,11 +75,6 @@ export default function App() {
     }
   }
 
-  function handleStatusSubmit(selectedStatus) {
-    fetchBooks(selectedStatus);
-  }
-
-
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
   };
@@ -111,29 +106,34 @@ export default function App() {
       <NavBar />
       <Container>
         <Routes>
-          <Route
+        <Route
             path='/'
             element={
-              <div>
-                <BestBooks books={books} />
-                <HandleError error={error} />
-                <AvailabilityFilter
-                  handleStatusSubmit={handleStatusSubmit}
-                  handleStatusChange={handleStatusChange}
-                  status={status}
-                />
-              </div>
+              <BooksLayout
+                books={books}
+                error={error}
+                handleStatusChange={handleStatusChange}
+                status={status}
+                showBestBooks={true} // only show on the '/' path
+              />
             }
           />
           <Route path='/about' element={<About />} />
           <Route
             path='/edit'
             element={
-              <AllBooks
+              <BooksLayout
                 books={books}
-                onUpdate={handleBookUpdate}
-                handleDelete={handleDelete}
-              />
+                error={error}
+                handleStatusChange={handleStatusChange}
+                status={status}
+              >
+                <AllBooks
+                  books={books}
+                  onUpdate={handleBookUpdate}
+                  handleDelete={handleDelete}
+                />
+              </BooksLayout>
             }
           />
           <Route
